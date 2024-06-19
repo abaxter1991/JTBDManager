@@ -64,8 +64,8 @@ class Command(BaseCommand):
 
                 x += 1
 
-            except Exception as e:
+            except Exception as error:
                 y += 1
-                print(e)
+                print(error)
 
         print(f'{x}/{num_accounts} accounts were created.')
