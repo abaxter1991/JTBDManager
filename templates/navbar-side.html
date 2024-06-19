@@ -1,0 +1,46 @@
+{% load static %}
+
+<div class="flex flex-col w-20">
+    <div class="flex flex-col h-0 flex-1 place-content-between overflow-y-auto">
+
+        <div class="flex items-center justify-center rounded-b-xl py-4">
+            <img class="h-8 w-auto" src="https://tailwindui.com/img/logos/workflow-mark.svg?color=white" alt="Site Logo">
+        </div>
+
+        <nav aria-label="Sidebar" class="py-6 flex flex-col items-center space-y-3">
+            <a href="#" class="flex items-center p-4 rounded-lg text-white hover:bg-primary-700 {% if '/dashboard/' in request.path %}bg-primary-700{% endif %}">
+                {% include 'icons/heroicons/outline/template-icon.html' %}
+                <span class="sr-only">Dashboard</span>
+            </a>
+            <a href="{% url 'projects:project-list' %}" class="flex items-center p-4 rounded-lg text-white hover:bg-primary-700 {% if '/projects/' in request.path %}bg-primary-700{% endif %}">
+                {% include 'icons/heroicons/outline/collection-icon.html' %}
+                <span class="sr-only">Projects</span>
+            </a>
+            <a href="#" class="flex items-center p-4 rounded-lg text-white hover:bg-primary-700 {% if '/teams/' in request.path %}bg-primary-700{% endif %}">
+                {% include 'icons/heroicons/outline/user-group-icon.html' %}
+                <span class="sr-only">Teams</span>
+            </a>
+            {% if user.is_superuser %}
+                <a href="{% url 'accounts:account-detail' user.username %}" class="flex items-center p-4 rounded-lg text-white hover:bg-primary-700 {% if '/accounts/' in request.path %}bg-primary-700{% endif %}">
+                    {% include 'icons/heroicons/outline/users-icon.html' %}
+                    <span class="sr-only">Users</span>
+                </a>
+            {% endif %}
+        </nav>
+
+        <div class="flex-shrink-0 py-4 flex items-center justify-center rounded-t-xl">
+            <a href="#" class="flex-shrink-0 w-full">
+                <img class="block mx-auto h-10 w-10 rounded-full object-cover" src="{{ user.profile.profile_picture.url }}" alt="">
+                <div class="sr-only">
+                    <p>
+                        {{ user.get_full_name }}
+                    </p>
+                    <p>
+                        Account settings
+                    </p>
+                </div>
+            </a>
+        </div>
+
+    </div>
+</div>
